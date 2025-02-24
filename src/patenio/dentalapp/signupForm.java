@@ -24,30 +24,27 @@ public class signupForm extends javax.swing.JFrame {
         initComponents();
     }
     
-    public static String em;
-    public boolean duplicateCheck(){
-        connectDB con= new connectDB();
-        
-        try{
+   public static String em;
+
+public boolean duplicateCheck() {
+    connectDB con = new connectDB();
+
+    try {
         String query = "SELECT * FROM tbl_user WHERE email='" + email.getText() + "'";
-        ResultSet resultSet=con.getData(query);
-        if(resultSet.next()){
-           em=resultSet.getString("email");
-            System.out.println(""+email);
-            if(em.equals(email.getText())){
-                JOptionPane.showMessageDialog(null, "Email already exist!");
+        ResultSet resultSet = con.getData(query);
+        if (resultSet.next()) {  
+            em = resultSet.getString("email");
+            if (em.equals(email.getText())) {
+                JOptionPane.showMessageDialog(null, "Email already exists!");
                 email.setText("");
-                
+                return true;
             }
-            return true;
-        }else{
-            return false;
         }
-    }catch(SQLException ex){
-            System.out.println(""+ex);
-            return false;        
-        }
+    } catch (SQLException ex) {
+        System.out.println("Error: " + ex);
     }
+    return false;
+}   
 
     Color bg1 = new Color (153,153,153);
     Color login_b= new Color (82,107,136);
@@ -73,14 +70,8 @@ public class signupForm extends javax.swing.JFrame {
         logo_placement1 = new javax.swing.JLabel();
         logo_pic = new javax.swing.JLabel();
         users_table = new javax.swing.JPanel();
-        phonenum_type = new javax.swing.JLabel();
         lname_label = new javax.swing.JLabel();
-        lname_type1 = new javax.swing.JLabel();
         fname_label = new javax.swing.JLabel();
-        fname_type = new javax.swing.JLabel();
-        email_type = new javax.swing.JLabel();
-        conpass_type = new javax.swing.JLabel();
-        pass_type = new javax.swing.JLabel();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
         phone_num = new javax.swing.JTextField();
@@ -120,43 +111,13 @@ public class signupForm extends javax.swing.JFrame {
         users_table.setBackground(new java.awt.Color(213, 220, 233));
         users_table.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        phonenum_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        phonenum_type.setForeground(new java.awt.Color(204, 204, 204));
-        phonenum_type.setText("Enter your phone number");
-        users_table.add(phonenum_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
-
         lname_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lname_label.setText("Last Name");
         users_table.add(lname_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
 
-        lname_type1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        lname_type1.setForeground(new java.awt.Color(204, 204, 204));
-        lname_type1.setText("Enter your last name");
-        users_table.add(lname_type1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
-
         fname_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         fname_label.setText("First Name");
         users_table.add(fname_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
-
-        fname_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        fname_type.setForeground(new java.awt.Color(204, 204, 204));
-        fname_type.setText("Enter your first name");
-        users_table.add(fname_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
-
-        email_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        email_type.setForeground(new java.awt.Color(204, 204, 204));
-        email_type.setText("Enter your email");
-        users_table.add(email_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
-
-        conpass_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        conpass_type.setForeground(new java.awt.Color(204, 204, 204));
-        conpass_type.setText("Enter your phone number");
-        users_table.add(conpass_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
-
-        pass_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        pass_type.setForeground(new java.awt.Color(204, 204, 204));
-        pass_type.setText("Enter your phone number");
-        users_table.add(pass_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
 
         fname.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         fname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -432,34 +393,42 @@ public class signupForm extends javax.swing.JFrame {
     if (fname.getText().isEmpty() || lname.getText().isEmpty() || 
     phone_num.getText().isEmpty() || email.getText().isEmpty() || 
     pass.getText().isEmpty() || conpass.getText().isEmpty()) {
-    
+
     JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Input Error", JOptionPane.ERROR_MESSAGE);
     return;
-} 
-    connectDB con= new connectDB();
-    
-    int result = con.insertData("INSERT INTO tbl_user (fname, lname, phone_num, email, pass, u_type, status) " 
-                + "VALUES('" + fname.getText() + "', '" + lname.getText() + "', '" + phone_num.getText() + "', '" 
-                + email.getText() + "', '" + pass.getText() + "', '" + type.getSelectedItem() + "', 'Pending')");
+}
 
-    if (!pass.getText().equals(conpass.getText())) { 
-      JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
-      pass.setText("");
-      conpass.setText("");
-  } else if (pass.getText().length() < 8) {
-      JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
-      pass.setText("");
-  } else if (duplicateCheck()) {
-      System.out.println("Duplicate Exist");       
-  } else if (result > 0) { 
-      JOptionPane.showMessageDialog(null, "Sign up successfully! Wait for the Admin's approval for your registration.");
-      loginForm lf = new loginForm();
-      lf.setVisible(true);
-      this.dispose();
-  } else {
-      JOptionPane.showMessageDialog(null, "Connection Error");
-  }
+if (!pass.getText().equals(conpass.getText())) { 
+    JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
+    pass.setText("");
+    conpass.setText("");
+    return;
+}
 
+if (pass.getText().length() < 8) {
+    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+    pass.setText("");
+    return;
+}
+
+if (duplicateCheck()) {
+    System.out.println("Duplicate Exists");
+    return; 
+}
+
+connectDB con = new connectDB();
+int result = con.insertData("INSERT INTO tbl_user (fname, lname, phone_num, email, pass, u_type, status) " 
+    + "VALUES('" + fname.getText() + "', '" + lname.getText() + "', '" + phone_num.getText() + "', '" 
+    + email.getText() + "', '" + pass.getText() + "', '" + type.getSelectedItem() + "', 'Pending')");
+
+if (result > 0) { 
+    JOptionPane.showMessageDialog(null, "Sign up successfully! Wait for the Admin's approval for your registration.");
+    loginForm lf = new loginForm();
+    lf.setVisible(true);
+    this.dispose();
+} else {
+    JOptionPane.showMessageDialog(null, "Connection Error");
+}
     }//GEN-LAST:event_login_layoutMouseClicked
 
     private void login_layoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseExited
@@ -511,19 +480,15 @@ public class signupForm extends javax.swing.JFrame {
     private javax.swing.JLabel cancel_button;
     private javax.swing.JPasswordField conpass;
     private javax.swing.JLabel conpass_label;
-    private javax.swing.JLabel conpass_type;
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_label1;
-    private javax.swing.JLabel email_type;
     private javax.swing.JTextField fname;
     private javax.swing.JLabel fname_label;
-    private javax.swing.JLabel fname_type;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lname;
     private javax.swing.JLabel lname_label;
-    private javax.swing.JLabel lname_type1;
     private javax.swing.JLabel login_button1;
     private javax.swing.JLabel login_form;
     private javax.swing.JPanel login_layout;
@@ -536,10 +501,8 @@ public class signupForm extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel pass_label;
-    private javax.swing.JLabel pass_type;
     private javax.swing.JTextField phone_num;
     private javax.swing.JLabel phonenum_label;
-    private javax.swing.JLabel phonenum_type;
     private javax.swing.JComboBox<String> type;
     private javax.swing.JPanel users_table;
     // End of variables declaration//GEN-END:variables

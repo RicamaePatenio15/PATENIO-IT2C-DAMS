@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import user.usersDashboard;
 
 /**
  *
@@ -23,7 +24,7 @@ public class loginForm extends javax.swing.JFrame {
     public loginForm() {
         initComponents();
     }
-    
+    static String type="";
     static String status= "";
     public static boolean loginUser(String email, String pass){
         connectDB con= new connectDB();
@@ -31,7 +32,8 @@ public class loginForm extends javax.swing.JFrame {
         String query = "SELECT * FROM tbl_user WHERE email='" + email + "' AND pass='" + pass + "'";
         ResultSet resultSet=con.getData(query);
         if(resultSet.next()){
-            status=resultSet.getString("status");         
+            type=resultSet.getString("u_type");
+            status=resultSet.getString("status");       
             return true;
         }else{
             return false;      
@@ -64,11 +66,9 @@ public class loginForm extends javax.swing.JFrame {
         logIn = new javax.swing.JLabel();
         sign_upbt = new javax.swing.JPanel();
         sign_up = new javax.swing.JLabel();
-        email_type = new javax.swing.JLabel();
         register_acc = new javax.swing.JLabel();
         email_icon = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
-        pass_type = new javax.swing.JLabel();
         email_label = new javax.swing.JLabel();
         pass_label = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
@@ -116,28 +116,6 @@ public class loginForm extends javax.swing.JFrame {
 
         jPanel1.add(sign_upbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 110, 40));
 
-        email_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        email_type.setForeground(new java.awt.Color(204, 204, 204));
-        email_type.setText("Enter your Email");
-        email_type.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                email_typeAncestorRemoved(evt);
-            }
-        });
-        email_type.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                email_typeFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                email_typeFocusLost(evt);
-            }
-        });
-        jPanel1.add(email_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
-
         register_acc.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         register_acc.setText("I don't have an account");
         jPanel1.add(register_acc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, -1, -1));
@@ -168,11 +146,6 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 260, 40));
-
-        pass_type.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        pass_type.setForeground(new java.awt.Color(204, 204, 204));
-        pass_type.setText("Enter password");
-        jPanel1.add(pass_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
         email_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         email_label.setText("EMAIL");
@@ -263,19 +236,27 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_sign_upbtMouseEntered
 
     private void login_layout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseClicked
-       if(loginUser(email.getText(), pass.getText())){
-        if(!status.equals("Active")){
-            JOptionPane.showMessageDialog(null, "The account is not yet Active. Please contact the administrator");
-        }else{
-            JOptionPane.showMessageDialog(null, "Login Successfully!");
-            adminDashboard ads= new adminDashboard();
-            ads.setVisible(true);
-            this.dispose(); 
-        } 
-       }else{
-            JOptionPane.showMessageDialog(null, "Login Failed!");
-            
+      if (loginUser(email.getText().trim(), pass.getText().trim())) {
+    if (!status.equals("Active")) {
+        JOptionPane.showMessageDialog(null, "The account is not yet Active. Please contact the administrator");
+    } else {
+        JOptionPane.showMessageDialog(null, "Login Successfully!");
+        if (type.equals("Admin")) {
+            adminDashboard ad = new adminDashboard();
+            ad.setVisible(true);
+            this.dispose();
+        } else if (type.equals("User")) {
+            usersDashboard ud = new usersDashboard();
+            ud.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "No account type found, contact the Administrator.");
         }
+    }
+} else {
+    JOptionPane.showMessageDialog(null, "Login Failed!");
+}
+
     }//GEN-LAST:event_login_layout1MouseClicked
 
     private void login_layout1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseEntered
@@ -307,18 +288,6 @@ public class loginForm extends javax.swing.JFrame {
         sf.setVisible(true);
         this.dispose();                    
     }//GEN-LAST:event_sign_upbtMouseClicked
-
-    private void email_typeAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_email_typeAncestorRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_email_typeAncestorRemoved
-
-    private void email_typeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_typeFocusGained
-
-    }//GEN-LAST:event_email_typeFocusGained
-
-    private void email_typeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_typeFocusLost
-
-    }//GEN-LAST:event_email_typeFocusLost
 
     private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
  
@@ -367,7 +336,6 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_icon;
     private javax.swing.JLabel email_label;
-    private javax.swing.JLabel email_type;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logIn;
@@ -377,7 +345,6 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel pass_icon;
     private javax.swing.JLabel pass_label;
-    private javax.swing.JLabel pass_type;
     private javax.swing.JLabel register_acc;
     private javax.swing.JPanel signUp;
     private javax.swing.JLabel sign_up;

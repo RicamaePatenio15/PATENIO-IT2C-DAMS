@@ -42,6 +42,9 @@ public class usersDashboard extends javax.swing.JFrame {
         logo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        admindb = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         db = new javax.swing.JPanel();
         dboard = new javax.swing.JLabel();
         up = new javax.swing.JPanel();
@@ -87,6 +90,20 @@ public class usersDashboard extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(213, 220, 233));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        admindb.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        admindb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        admindb.setText("USER");
+        jPanel1.add(admindb, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 60, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 440));
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("LOGOUT");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
+
         db.setBackground(new java.awt.Color(213, 220, 233));
         db.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -105,19 +122,19 @@ public class usersDashboard extends javax.swing.JFrame {
         dbLayout.setHorizontalGroup(
             dbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dbLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(43, 43, 43)
                 .addComponent(dboard)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         dbLayout.setVerticalGroup(
             dbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dbLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dboard, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(dboard, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(db, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 190, 70));
+        jPanel1.add(db, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 190, 60));
 
         up.setBackground(new java.awt.Color(213, 220, 233));
         up.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,11 +162,11 @@ public class usersDashboard extends javax.swing.JFrame {
             upLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(upage, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(upage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(up, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 190, 70));
+        jPanel1.add(up, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 190, 60));
 
         rprt.setBackground(new java.awt.Color(213, 220, 233));
         rprt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,11 +194,11 @@ public class usersDashboard extends javax.swing.JFrame {
             rprtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rprtLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(report, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(report, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(rprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 190, 70));
+        jPanel1.add(rprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 60));
 
         mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 470));
 
@@ -203,15 +220,15 @@ public class usersDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dbMouseEntered
-       db.setBackground(panel);
+        db.setBackground(panel);
     }//GEN-LAST:event_dbMouseEntered
 
     private void dbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dbMouseExited
-       db.setBackground(opanel);
+        db.setBackground(opanel);
     }//GEN-LAST:event_dbMouseExited
 
     private void upMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upMouseEntered
-       up.setBackground(panel);
+        up.setBackground(panel);
     }//GEN-LAST:event_upMouseEntered
 
     private void upMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_upMouseExited
@@ -263,10 +280,13 @@ public class usersDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel admindb;
     private javax.swing.JPanel db;
     private javax.swing.JLabel dboard;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel mainPanel;

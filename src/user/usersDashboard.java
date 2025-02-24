@@ -38,7 +38,13 @@ public class usersDashboard extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         usersDashboard = new javax.swing.JPanel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         logo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -60,20 +66,30 @@ public class usersDashboard extends javax.swing.JFrame {
         usersDashboard.setBackground(new java.awt.Color(213, 220, 233));
         usersDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDesktopPane1.setBackground(new java.awt.Color(122, 122, 122));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alist.png"))); // NOI18N
+        usersDashboard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 240, 210));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/5.png"))); // NOI18N
+        usersDashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 220, 210));
 
-        usersDashboard.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 410));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/6.png"))); // NOI18N
+        usersDashboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 200, 210));
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel7.setText("ADD PATIENT");
+        usersDashboard.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel8.setText("APPOINTMENT LIST");
+        usersDashboard.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel9.setText("APPOINTMENT");
+        usersDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel10.setText("NOTE: MOCKUP ONLY");
+        usersDashboard.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         mainPanel.add(usersDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 580, 410));
 
@@ -87,7 +103,7 @@ public class usersDashboard extends javax.swing.JFrame {
 
         mainPanel.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 580, 60));
 
-        jPanel1.setBackground(new java.awt.Color(213, 220, 233));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         admindb.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -104,7 +120,7 @@ public class usersDashboard extends javax.swing.JFrame {
         jLabel3.setText("LOGOUT");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
-        db.setBackground(new java.awt.Color(213, 220, 233));
+        db.setBackground(new java.awt.Color(204, 204, 204));
         db.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 dbMouseEntered(evt);
@@ -136,7 +152,7 @@ public class usersDashboard extends javax.swing.JFrame {
 
         jPanel1.add(db, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 190, 60));
 
-        up.setBackground(new java.awt.Color(213, 220, 233));
+        up.setBackground(new java.awt.Color(204, 204, 204));
         up.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 upMouseEntered(evt);
@@ -168,7 +184,7 @@ public class usersDashboard extends javax.swing.JFrame {
 
         jPanel1.add(up, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 190, 60));
 
-        rprt.setBackground(new java.awt.Color(213, 220, 233));
+        rprt.setBackground(new java.awt.Color(204, 204, 204));
         rprt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 rprtMouseEntered(evt);
@@ -283,10 +299,16 @@ public class usersDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel admindb;
     private javax.swing.JPanel db;
     private javax.swing.JLabel dboard;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel mainPanel;

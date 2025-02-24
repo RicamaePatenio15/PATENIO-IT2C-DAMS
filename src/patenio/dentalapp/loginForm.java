@@ -67,12 +67,10 @@ public class loginForm extends javax.swing.JFrame {
         sign_upbt = new javax.swing.JPanel();
         sign_up = new javax.swing.JLabel();
         register_acc = new javax.swing.JLabel();
-        email_icon = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         email_label = new javax.swing.JLabel();
         pass_label = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
-        pass_icon = new javax.swing.JLabel();
         login_layout1 = new javax.swing.JPanel();
         login_button1 = new javax.swing.JLabel();
 
@@ -120,9 +118,6 @@ public class loginForm extends javax.swing.JFrame {
         register_acc.setText("I don't have an account");
         jPanel1.add(register_acc, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, -1, -1));
 
-        email_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email1.png"))); // NOI18N
-        jPanel1.add(email_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
-
         email.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         email.setText("  ");
@@ -163,9 +158,6 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 260, 40));
-
-        pass_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password.png"))); // NOI18N
-        jPanel1.add(pass_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
         login_layout1.setBackground(new java.awt.Color(42, 82, 129));
         login_layout1.setForeground(new java.awt.Color(42, 82, 129));
@@ -334,7 +326,6 @@ public class loginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField email;
-    private javax.swing.JLabel email_icon;
     private javax.swing.JLabel email_label;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -343,7 +334,6 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JPanel login_layout1;
     private javax.swing.JLabel logo;
     private javax.swing.JPasswordField pass;
-    private javax.swing.JLabel pass_icon;
     private javax.swing.JLabel pass_label;
     private javax.swing.JLabel register_acc;
     private javax.swing.JPanel signUp;

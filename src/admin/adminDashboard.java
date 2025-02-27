@@ -198,6 +198,9 @@ public class adminDashboard extends javax.swing.JFrame {
 
         staff_info.setBackground(new java.awt.Color(255, 255, 255));
         staff_info.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                staff_infoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 staff_infoMouseEntered(evt);
             }
@@ -313,6 +316,13 @@ public class adminDashboard extends javax.swing.JFrame {
     private void settingsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsMouseExited
         settings.setBackground(white);
     }//GEN-LAST:event_settingsMouseExited
+
+    private void staff_infoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staff_infoMouseClicked
+        userForm uf= new userForm();
+        uf.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_staff_infoMouseClicked
 
     /**
      * @param args the command line arguments

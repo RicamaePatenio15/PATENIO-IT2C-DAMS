@@ -5,6 +5,7 @@
  */
 package patenio.dentalapp;
 import admin.adminDashboard;
+import config.Session;
 import config.connectDB;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -24,16 +25,26 @@ public class loginForm extends javax.swing.JFrame {
     public loginForm() {
         initComponents();
     }
-    static String type="";
-    static String status= "";
+    static String type;
+    static String status;
     public static boolean loginUser(String email, String pass){
         connectDB con= new connectDB();
         try{
-        String query = "SELECT * FROM tbl_user WHERE email='" + email + "' AND pass='" + pass + "'";
+        String query = "SELECT * FROM tbl_user WHERE email='" +email+ "' AND pass='"+pass+ "'";
         ResultSet resultSet=con.getData(query);
+        
         if(resultSet.next()){
             type=resultSet.getString("u_type");
-            status=resultSet.getString("status");       
+            status=resultSet.getString("status");   
+            
+//        Session sess=Session.getInstance();
+//        sess.setUid(resultSet.getInt("u_id"));
+//        sess.setFname(resultSet.getString("fname"));
+//        sess.setFname(resultSet.getString("lname"));
+//        sess.setFname(resultSet.getString("email"));
+//        sess.setFname(resultSet.getString("type"));
+//        sess.setFname(resultSet.getString("status"));
+//            System.out.println(""+sess.getUid());
             return true;
         }else{
             return false;      
@@ -49,7 +60,7 @@ public class loginForm extends javax.swing.JFrame {
   Color login_b= new Color (82,107,136);
   Color bg= new Color (42,82,129);
   Color signup= new Color (122,122,122);
- 
+  Color signup_1= new Color (167,167,167);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,10 +84,13 @@ public class loginForm extends javax.swing.JFrame {
         pass = new javax.swing.JPasswordField();
         login_layout1 = new javax.swing.JPanel();
         login_button1 = new javax.swing.JLabel();
+        cancel = new javax.swing.JPanel();
+        cancel_button = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         signUp.setBackground(new java.awt.Color(42, 82, 129));
         signUp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,24 +135,6 @@ public class loginForm extends javax.swing.JFrame {
         email.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         email.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        email.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                emailFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                emailFocusLost(evt);
-            }
-        });
-        email.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                emailMouseClicked(evt);
-            }
-        });
-        email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
-            }
-        });
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 260, 40));
 
         email_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -151,11 +147,6 @@ public class loginForm extends javax.swing.JFrame {
 
         pass.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         pass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passActionPerformed(evt);
-            }
-        });
         jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 260, 40));
 
         login_layout1.setBackground(new java.awt.Color(42, 82, 129));
@@ -170,26 +161,38 @@ public class loginForm extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 login_layout1MouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                login_layout1MouseReleased(evt);
-            }
         });
         login_layout1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         login_button1.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         login_button1.setForeground(new java.awt.Color(255, 255, 255));
         login_button1.setText("LOGIN");
-        login_button1.addMouseListener(new java.awt.event.MouseAdapter() {
+        login_layout1.add(login_button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 60, -1));
+
+        jPanel1.add(login_layout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 120, 40));
+
+        cancel.setBackground(new java.awt.Color(122, 122, 122));
+        cancel.setForeground(new java.awt.Color(255, 255, 255));
+        cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                login_button1MouseClicked(evt);
+                cancelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                login_button1MouseEntered(evt);
+                cancelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelMouseExited(evt);
             }
         });
-        login_layout1.add(login_button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        cancel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(login_layout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 160, 40));
+        cancel_button.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        cancel_button.setForeground(new java.awt.Color(255, 255, 255));
+        cancel_button.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cancel_button.setText("CANCEL");
+        cancel.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, -1));
+
+        jPanel1.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 120, 40));
 
         signUp.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 450, 590));
 
@@ -202,7 +205,7 @@ public class loginForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUp, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -210,24 +213,12 @@ public class loginForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseClicked
-      
-    }//GEN-LAST:event_emailMouseClicked
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
-
-    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passActionPerformed
-
     private void sign_upbtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_upbtMouseEntered
         sign_upbt.setBackground(bg1);
     }//GEN-LAST:event_sign_upbtMouseEntered
 
     private void login_layout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseClicked
-      if (loginUser(email.getText().trim(), pass.getText().trim())) {
+     if (loginUser(email.getText(), pass.getText())) {
     if (!status.equals("Active")) {
         JOptionPane.showMessageDialog(null, "The account is not yet Active. Please contact the administrator");
     } else {
@@ -244,9 +235,9 @@ public class loginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No account type found, contact the Administrator.");
         }
     }
-} else {
-    JOptionPane.showMessageDialog(null, "Login Failed!");
-}
+    }else{
+         JOptionPane.showMessageDialog(null, "Invalid Account!");
+     }
 
     }//GEN-LAST:event_login_layout1MouseClicked
 
@@ -254,21 +245,9 @@ public class loginForm extends javax.swing.JFrame {
       login_layout1.setBackground(login_b);
     }//GEN-LAST:event_login_layout1MouseEntered
 
-    private void login_button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_button1MouseClicked
-        
-    }//GEN-LAST:event_login_button1MouseClicked
-
     private void login_layout1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseExited
       login_layout1.setBackground(bg);
     }//GEN-LAST:event_login_layout1MouseExited
-
-    private void login_button1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_button1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_login_button1MouseEntered
-
-    private void login_layout1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseReleased
-
-    }//GEN-LAST:event_login_layout1MouseReleased
 
     private void sign_upbtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sign_upbtMouseExited
         sign_upbt.setBackground(signup);
@@ -280,13 +259,19 @@ public class loginForm extends javax.swing.JFrame {
         this.dispose();                    
     }//GEN-LAST:event_sign_upbtMouseClicked
 
-    private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
- 
-    }//GEN-LAST:event_emailFocusGained
+    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+    if(JOptionPane.showConfirmDialog(null, "Do you want to Exit?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+    System.exit(0);
+}
+    }//GEN-LAST:event_cancelMouseClicked
 
-    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+    private void cancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseEntered
+        cancel.setBackground(signup_1);
+    }//GEN-LAST:event_cancelMouseEntered
 
-    }//GEN-LAST:event_emailFocusLost
+    private void cancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseExited
+        cancel.setBackground(signup);
+    }//GEN-LAST:event_cancelMouseExited
 
     /**
      * @param args the command line arguments
@@ -324,6 +309,8 @@ public class loginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel cancel;
+    private javax.swing.JLabel cancel_button;
     private javax.swing.JTextField email;
     private javax.swing.JLabel email_label;
     private javax.swing.JLabel jLabel3;

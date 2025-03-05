@@ -5,9 +5,9 @@
  */
 package user;
 
-import admin.*;
 import patenio.dentalapp.*;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +43,7 @@ public class usersDashboard extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        acc_name = new javax.swing.JLabel();
         logo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -66,6 +66,12 @@ public class usersDashboard extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         mainPanel.setBackground(new java.awt.Color(42, 82, 129));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,10 +82,10 @@ public class usersDashboard extends javax.swing.JFrame {
         jLabel13.setText("jLabel13");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, -10, 133, 142));
 
-        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("USER");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 220, 20));
+        acc_name.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_name.setText("USER");
+        jPanel2.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 220, 20));
 
         mainPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 810, 680));
 
@@ -193,11 +199,21 @@ public class usersDashboard extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         jLabel11.setText("jLabel11");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
         logo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 620, 69, 58));
 
         logout.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         logout.setForeground(new java.awt.Color(153, 153, 153));
         logout.setText("LOGOUT");
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
         logo.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, 30));
 
         mainPanel.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, 680));
@@ -251,6 +267,26 @@ public class usersDashboard extends javax.swing.JFrame {
         settings.setBackground(white);
     }//GEN-LAST:event_settingsMouseExited
 
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+       if(JOptionPane.showConfirmDialog(null, "Do you want to Logout?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        loginForm lf= new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+       }
+    }//GEN-LAST:event_logoutMouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+      if(JOptionPane.showConfirmDialog(null, "Do you want to Logout?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        loginForm lf= new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+      }
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+     
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +326,7 @@ public class usersDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel acc_name;
     private javax.swing.JPanel app;
     private javax.swing.JPanel db;
     private javax.swing.JLabel jLabel1;
@@ -297,7 +334,6 @@ public class usersDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;

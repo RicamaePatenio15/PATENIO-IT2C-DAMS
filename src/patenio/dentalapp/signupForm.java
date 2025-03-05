@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
+import java.util.regex.*;
 /**
  *
  * @author pc
@@ -22,6 +22,12 @@ public class signupForm extends javax.swing.JFrame {
      */
     public signupForm() {
         initComponents();
+    }
+    
+    private boolean isValidEmail(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
     }
     
    public static String em;
@@ -94,6 +100,7 @@ public boolean duplicateCheck() {
         loginhere = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         mainPanel.setBackground(new java.awt.Color(42, 82, 129));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,51 +128,14 @@ public boolean duplicateCheck() {
 
         fname.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         fname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        fname.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fnameMouseClicked(evt);
-            }
-        });
-        fname.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                fnameCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        fname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameActionPerformed(evt);
-            }
-        });
         users_table.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 270, 40));
 
         lname.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        lname.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lnameMouseClicked(evt);
-            }
-        });
-        lname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lnameActionPerformed(evt);
-            }
-        });
         users_table.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 270, 40));
 
         phone_num.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         phone_num.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        phone_num.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                phone_numMouseClicked(evt);
-            }
-        });
-        phone_num.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phone_numActionPerformed(evt);
-            }
-        });
         users_table.add(phone_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 270, 40));
 
         pass_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -174,16 +144,6 @@ public boolean duplicateCheck() {
 
         email.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         email.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        email.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                emailMouseClicked(evt);
-            }
-        });
-        email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
-            }
-        });
         users_table.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 270, 40));
 
         email_label1.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -194,11 +154,6 @@ public boolean duplicateCheck() {
         users_table.add(conpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 270, 40));
 
         pass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passActionPerformed(evt);
-            }
-        });
         users_table.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, 40));
 
         conpass_label.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -329,60 +284,21 @@ public boolean duplicateCheck() {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fnameMouseClicked
-
-    }//GEN-LAST:event_fnameMouseClicked
-
-    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
-    
-     
-    }//GEN-LAST:event_fnameActionPerformed
-
-    private void lnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lnameMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lnameMouseClicked
-
-    private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lnameActionPerformed
-
-    private void phone_numMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phone_numMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phone_numMouseClicked
-
-    private void phone_numActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phone_numActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phone_numActionPerformed
-
-    private void emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailMouseClicked
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
-
-    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passActionPerformed
-
     private void login_layoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseEntered
         login_layout.setBackground(login_b);
     }//GEN-LAST:event_login_layoutMouseEntered
-
-    private void fnameCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_fnameCaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameCaretPositionChanged
 
     private void login_layout1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseEntered
         login_layout1.setBackground(signup_1);
     }//GEN-LAST:event_login_layout1MouseEntered
 
     private void login_layout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseClicked
-      
-      loginForm lf= new loginForm();
+    if (JOptionPane.showConfirmDialog(this, "The data you inputted will be erased. Are you sure you want to cancel?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+     loginForm lf= new loginForm();
       lf.setVisible(true);
       this.dispose();
+}
+
     }//GEN-LAST:event_login_layout1MouseClicked
 
     private void login_layout1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseExited
@@ -396,39 +312,32 @@ public boolean duplicateCheck() {
 
     JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Input Error", JOptionPane.ERROR_MESSAGE);
     return;
-}
+    }
+    
+//    if (!phone_num.matches("\\d{11}")) {
+//    JOptionPane.showMessageDialog(this, "Please enter a valid phone number (11 digits only).", "Input Error", JOptionPane.ERROR_MESSAGE);
+//    return;
+//    }
+//    
+        
+       
+    if (!pass.getText().equals(conpass.getText())) { 
+        JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        pass.setText("");
+        conpass.setText("");
+        return;
+    }
 
-if (!pass.getText().equals(conpass.getText())) { 
-    JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    pass.setText("");
-    conpass.setText("");
-    return;
-}
+    if (pass.getText().length() < 8) {
+        JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        pass.setText("");
+        return;
+    }
 
-if (pass.getText().length() < 8) {
-    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    pass.setText("");
-    return;
-}
-
-if (duplicateCheck()) {
-    System.out.println("Duplicate Exists");
-    return; 
-}
-
-connectDB con = new connectDB();
-int result = con.insertData("INSERT INTO tbl_user (fname, lname, phone_num, email, pass, u_type, status) " 
-    + "VALUES('" + fname.getText() + "', '" + lname.getText() + "', '" + phone_num.getText() + "', '" 
-    + email.getText() + "', '" + pass.getText() + "', '" + type.getSelectedItem() + "', 'Pending')");
-
-if (result > 0) { 
-    JOptionPane.showMessageDialog(null, "Sign up successfully! Wait for the Admin's approval for your registration.");
-    loginForm lf = new loginForm();
-    lf.setVisible(true);
-    this.dispose();
-} else {
-    JOptionPane.showMessageDialog(null, "Connection Error");
-}
+    if (duplicateCheck()) {
+        System.out.println("Duplicate Exists");
+        return; 
+    }
     }//GEN-LAST:event_login_layoutMouseClicked
 
     private void login_layoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseExited

@@ -284,70 +284,82 @@ public boolean duplicateCheck() {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void login_layoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseEntered
-        login_layout.setBackground(login_b);
-    }//GEN-LAST:event_login_layoutMouseEntered
+    private void login_layout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseClicked
+        if (JOptionPane.showConfirmDialog(this, "The data you inputted will be erased. Are you sure you want to cancel?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            loginForm lf= new loginForm();
+            lf.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_login_layout1MouseClicked
 
     private void login_layout1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseEntered
         login_layout1.setBackground(signup_1);
     }//GEN-LAST:event_login_layout1MouseEntered
 
-    private void login_layout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseClicked
-    if (JOptionPane.showConfirmDialog(this, "The data you inputted will be erased. Are you sure you want to cancel?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-     loginForm lf= new loginForm();
-      lf.setVisible(true);
-      this.dispose();
-}
-
-    }//GEN-LAST:event_login_layout1MouseClicked
-
     private void login_layout1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layout1MouseExited
-       login_layout1.setBackground(signup);
+        login_layout1.setBackground(signup);
     }//GEN-LAST:event_login_layout1MouseExited
 
     private void login_layoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseClicked
-    if (fname.getText().isEmpty() || lname.getText().isEmpty() || 
-    phone_num.getText().isEmpty() || email.getText().isEmpty() || 
-    pass.getText().isEmpty() || conpass.getText().isEmpty()) {
+        if (fname.getText().isEmpty() || lname.getText().isEmpty() ||
+            phone_num.getText().isEmpty() || email.getText().isEmpty() ||
+            pass.getText().isEmpty() || conpass.getText().isEmpty()) {
 
-    JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    return;
-    }
-    
-//    if (!phone_num.matches("\\d{11}")) {
-//    JOptionPane.showMessageDialog(this, "Please enter a valid phone number (11 digits only).", "Input Error", JOptionPane.ERROR_MESSAGE);
-//    return;
-//    }
-//    
+            JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //    if (!phone_num.matches("\\d{11}")) {
+            //    JOptionPane.showMessageDialog(this, "Please enter a valid phone number (11 digits only).", "Input Error", JOptionPane.ERROR_MESSAGE);
+            //    return;
+            //    }
+        //
+
+        if (!pass.getText().equals(conpass.getText())) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            pass.setText("");
+            conpass.setText("");
+            return;
+        }
+
+        if (pass.getText().length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            pass.setText("");
+            return;
+        }
+
+        if (duplicateCheck()) {
+            System.out.println("Duplicate Exists");
+            return;
+        }
         
-       
-    if (!pass.getText().equals(conpass.getText())) { 
-        JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        pass.setText("");
-        conpass.setText("");
-        return;
-    }
+        connectDB con = new connectDB();
+    int result = con.insertData("INSERT INTO tbl_user (fname, lname, phone_num, email, pass, u_type, status) " 
+        + "VALUES('" + fname.getText() + "', '" + lname.getText() + "', '" + phone_num.getText() + "', '" 
+        + email.getText() + "', '" + pass.getText() + "', '" + type.getSelectedItem() + "', 'Pending')");
 
-    if (pass.getText().length() < 8) {
-        JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        pass.setText("");
-        return;
-    }
-
-    if (duplicateCheck()) {
-        System.out.println("Duplicate Exists");
-        return; 
+    if (result > 0) { 
+        JOptionPane.showMessageDialog(null, "Sign up successfully! Wait for the Admin's approval for your registration.");
+        loginForm lf = new loginForm();
+        lf.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(null, "Connection Error");
     }
     }//GEN-LAST:event_login_layoutMouseClicked
 
+    private void login_layoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseEntered
+        login_layout.setBackground(login_b);
+    }//GEN-LAST:event_login_layoutMouseEntered
+
     private void login_layoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_login_layoutMouseExited
-       login_layout.setBackground(bg);
+        login_layout.setBackground(bg);
     }//GEN-LAST:event_login_layoutMouseExited
 
     private void loginhereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginhereMouseClicked
-       loginForm fm= new loginForm();
-       fm.setVisible(true);
-       this.dispose(); 
+        loginForm fm= new loginForm();
+        fm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_loginhereMouseClicked
 
     /**

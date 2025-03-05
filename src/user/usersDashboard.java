@@ -5,6 +5,7 @@
  */
 package user;
 
+import config.Session;
 import patenio.dentalapp.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -284,7 +285,13 @@ public class usersDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-     
+     Session sess = Session.getInstance();
+     if(sess.getUid()== 0){
+      JOptionPane.showMessageDialog(null, "No account found, must login!");
+      loginForm lf = new loginForm();
+      lf.setVisible(true);
+      this.dispose();
+     }
     }//GEN-LAST:event_formWindowActivated
 
     /**

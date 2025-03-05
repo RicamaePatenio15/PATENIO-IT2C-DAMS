@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.Session;
 import patenio.dentalapp.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -219,7 +220,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("STAFF");
+        jLabel19.setText("USERS");
         staff_info.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 60));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff_1.png"))); // NOI18N
@@ -372,7 +373,13 @@ public class adminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-      
+      Session sess = Session.getInstance();
+     if(sess.getUid()== 0){
+      JOptionPane.showMessageDialog(null, "No account found, must login!");
+      loginForm lf = new loginForm();
+      lf.setVisible(true);
+      this.dispose();
+     }
     }//GEN-LAST:event_formWindowActivated
 
     /**

@@ -380,6 +380,7 @@ public class adminDashboard extends javax.swing.JFrame {
       lf.setVisible(true);
       this.dispose();
      }
+     acc_name.setText(""+sess.getFname());
     }//GEN-LAST:event_formWindowActivated
 
     /**

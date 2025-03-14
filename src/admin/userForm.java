@@ -5,11 +5,15 @@
  */
 package admin;
 
+import config.Session;
 import config.connectDB;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
+import patenio.dentalapp.loginForm;
 
 /**
  *
@@ -68,14 +72,18 @@ public class userForm extends javax.swing.JFrame {
         services = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        services1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         staff_info = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        edit = new javax.swing.JLabel();
         settings = new javax.swing.JPanel();
-        lgot = new javax.swing.JLabel();
-        logout = new javax.swing.JLabel();
         urs = new javax.swing.JLabel();
         usrs_name = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         mainPanel.setBackground(new java.awt.Color(42, 82, 129));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,6 +103,11 @@ public class userForm extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 770, 560));
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b_icon.png"))); // NOI18N
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
         jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 10, 110, 60));
 
         mainPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 810, 680));
@@ -124,6 +137,9 @@ public class userForm extends javax.swing.JFrame {
 
         services.setBackground(new java.awt.Color(255, 255, 255));
         services.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                servicesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 servicesMouseEntered(evt);
             }
@@ -141,10 +157,37 @@ public class userForm extends javax.swing.JFrame {
         jLabel5.setText("ADD USER");
         services.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 140, 70));
 
+        services1.setBackground(new java.awt.Color(255, 255, 255));
+        services1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                services1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                services1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                services1MouseExited(evt);
+            }
+        });
+        services1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        jLabel10.setText("jLabel9");
+        services1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 170, 100));
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel6.setText("ADD USER");
+        services1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 140, 70));
+
+        services.add(services1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 260, 70));
+
         logo.add(services, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 260, 70));
 
         staff_info.setBackground(new java.awt.Color(255, 255, 255));
         staff_info.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                staff_infoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 staff_infoMouseEntered(evt);
             }
@@ -153,6 +196,15 @@ public class userForm extends javax.swing.JFrame {
             }
         });
         staff_info.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel7.setText("EDIT USER");
+        staff_info.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 140, 70));
+
+        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit_user_icon.png"))); // NOI18N
+        edit.setText("jLabel8");
+        staff_info.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, 100, 110));
+
         logo.add(staff_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 260, 70));
 
         settings.setBackground(new java.awt.Color(255, 255, 255));
@@ -166,15 +218,6 @@ public class userForm extends javax.swing.JFrame {
         });
         settings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         logo.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 260, 70));
-
-        lgot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
-        lgot.setText("jLabel11");
-        logo.add(lgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 620, 69, 58));
-
-        logout.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        logout.setForeground(new java.awt.Color(153, 153, 153));
-        logout.setText("LOGOUT");
-        logo.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, 30));
 
         urs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b_staff_icon.png"))); // NOI18N
         urs.setText("jLabel17");
@@ -229,6 +272,63 @@ public class userForm extends javax.swing.JFrame {
         settings.setBackground(white);
     }//GEN-LAST:event_settingsMouseExited
 
+    private void servicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_servicesMouseClicked
+        createUserForm cuf= new createUserForm();
+        cuf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_servicesMouseClicked
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        adminDashboard ad= new adminDashboard();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backMouseClicked
+
+    private void services1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_services1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_services1MouseClicked
+
+    private void services1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_services1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_services1MouseEntered
+
+    private void services1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_services1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_services1MouseExited
+
+    private void staff_infoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staff_infoMouseClicked
+        int rowIndex=tbl_user.getSelectedRow();
+ 
+        if(rowIndex<0){
+            JOptionPane.showMessageDialog(null, "Select an item!");
+        }else{
+            try {
+        connectDB con = new connectDB();
+        TableModel tm = tbl_user.getModel();
+        ResultSet rs = con.getData("SELECT * FROM tbl_user WHERE u_id= '" + tm.getValueAt(rowIndex, 0) + "'");
+
+        if (rs.next()) {
+            createUserForm cuf= new createUserForm();
+            cuf.u_id.setText(""+rs.getInt("u_id"));
+            cuf.fname.setText(""+rs.getString("fname"));
+            cuf.lname.setText(""+rs.getString("lname"));
+            cuf.email.setText(""+rs.getString("email"));
+            cuf.phone_num.setText(""+rs.getString("phone_num"));
+            cuf.pass.setText(""+rs.getString("pass"));
+            cuf.type.setSelectedItem(""+rs.getString("u_type"));
+            cuf.status.setSelectedItem(""+rs.getString("status"));
+            
+            cuf.add.setEnabled(false);
+            cuf.update.setEnabled(true);
+            
+            cuf.setVisible(true);
+            this.dispose();
+        }
+} catch (SQLException ex) {
+}
+        }
+    }//GEN-LAST:event_staff_infoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -266,20 +366,23 @@ public class userForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel back;
+    private javax.swing.JLabel edit;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lgot;
     private javax.swing.JPanel logo;
-    private javax.swing.JLabel logout;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel services;
+    private javax.swing.JPanel services1;
     private javax.swing.JPanel settings;
     private javax.swing.JPanel staff_info;
     private javax.swing.JTable tbl_user;
